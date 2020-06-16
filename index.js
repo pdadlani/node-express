@@ -47,13 +47,27 @@ server.delete('/api/channels/:id', (req, res) => {
 
   if (deleted) {
     channels = channels.filter(channel => channel.id !== id);
-    res.status(200).json(deleted)
+    res.status(200).json(deleted);
   } else {
     res
       .status(404)
-      .json({ message: "Channel you are looking for does not exist." })
+      .json({ message: "Channel you are looking for does not exist." });
   }
-})
+});
+
+server.delete("/api/lessons/:id", (req, res) => {
+  const { id } = req.params;
+  const deleted = lessons.find((lesson) => lesson.id === id);
+
+  if (deleted) {
+    lessons = lessons.filter((lesson) => lesson.id !== id);
+    res.status(200).json(deleted);
+  } else {
+    res
+      .status(404)
+      .json({ message: "Lesson you are looking for does not exist." });
+  }
+});
 
 server.listen(PORT, () => {
   console.log(`\n*** Server Running on http://localhost:${PORT}`);
